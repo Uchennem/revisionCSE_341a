@@ -5,10 +5,10 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse341-revision.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/sarah": {
@@ -22,5 +22,5 @@
       }
     }
   },
-  "scheme": "http"
+  "scheme": "https"
 }
