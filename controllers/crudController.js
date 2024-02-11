@@ -3,14 +3,14 @@ const { ObjectId } = require('mongodb');
 const { getDb } = require('../mongoDB/mongodb');
 
 // GET all car in Db
-async function retrieveAllCar(req, res) {
+async function retrieveAllCars(req, res) {
     try {
         const db = getDb();
         if (!db) {
             return res.status(500).json({ error: 'Internal Server Error' });
         }
 
-        const carCollection = db.collection('car');
+        const carCollection = db.collection('cars');
         const car = await carCollection.find({}).toArray();
 
         res.json(car);
@@ -170,4 +170,4 @@ async function deleteCar(req, res) {
     }
 }
 
-module.exports = { retrieveAllCar, retrieveOneCar, createCar, updateCar, deleteCar };
+module.exports = { retrieveAllCars, retrieveOneCar, createCar, updateCar, deleteCar };

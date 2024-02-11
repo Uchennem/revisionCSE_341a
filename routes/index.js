@@ -6,7 +6,7 @@ const CRUDController = require('../controllers/crudController');
 // home routes
 router.get("/", homecontroller.homeRoute);
 router.get("/sarah", homecontroller.sarahRoute);
-router.get("/cars", CRUDController.retrieveAllCar)
+router.get("/cars", CRUDController.retrieveAllCars)
 router.get("/cars/:id", CRUDController.retrieveOneCar)
 
 
