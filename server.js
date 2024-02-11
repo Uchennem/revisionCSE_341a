@@ -2,12 +2,15 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger-output.json')
 const express = require('express');
 const app = express();
-const { initDb } = require('./mongoDB/mongodb')
+const { initDb } = require('./mongoDB/mongodb.js')
 const router = require('./routes/index.js')
 
 
 // The connection port localhost or onrender
 const port = process.env.PORT || 8080;
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 // Add support for CORS
 app.use((req, res, next) => {
@@ -23,9 +26,7 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use('/', router);
-
-initDb((err) => {
+  initDb((err) => {
     if (err) {
         console.error('Error initializing MongoDB:', err);
     } else {
@@ -34,5 +35,8 @@ initDb((err) => {
         });
     }
 });
+
+app.use('/', router);
+
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

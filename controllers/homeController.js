@@ -2,4 +2,8 @@ const sarahRoute = (req, res) => {
     res.send("Sarah")
 }
 
-module.exports = sarahRoute;
+const homeRoute = (req, res) => {
+    res.send("Welcome to Timmy Toughman's Car Dealership website")
+}
+
+module.exports = {sarahRoute, homeRoute};
