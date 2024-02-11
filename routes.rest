@@ -1,0 +1,44 @@
+#Local host
+
+## Read all contacts
+GET http://localhost:8080/cars
+
+###
+
+# Create a new contact
+POST http://localhost:8080/cars
+Content-Type: application/json
+
+{
+    "inv_make": "Invsible",
+    "inv_model": "Sightless",
+    "inv_year": "1964",
+    "inv_description": "Not sure where this car came from. Only John Cena currently owns one.",
+    "inv_image": "/images/mechanic.jpg",
+    "inv_thumbnail": "/images/mechanic-tn.jpg",
+    "inv_price": 10000,
+    "inv_miles": 200125,
+    "inv_color": "Rust",
+    "classification_id": 5
+  }
+
+###
+
+#onrender
+# Update a contact
+PUT http://localhost:8080/cars/
+
+Content-Type: application/json
+
+{
+  
+ "inv_model": "UdontCme",
+    "inv_year": "2015",
+}
+
+###
+
+# Delete a contact
+DELETE http://localhost:/contacts/65b5aaa3cd16244068c37370
+
+

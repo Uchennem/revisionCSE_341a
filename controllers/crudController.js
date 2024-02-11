@@ -76,7 +76,7 @@ async function createCar(req, res) {
             return res.status(500).json({ error: 'Internal Server Error' });
         }
 
-        const carCollection = db.collection('car');
+        const carCollection = db.collection('cars');
 
         
 
@@ -102,7 +102,7 @@ async function updateCar(req, res) {
             return res.status(500).json({ error: 'Internal Server Error' });
         }
 
-        const carCollection = db.collection('car');
+        const carCollection = db.collection('cars');
 
         // Extract car ID from the request parameters
         const carId = req.params.id;
@@ -149,7 +149,7 @@ async function deleteCar(req, res) {
             return res.status(500).json({ error: 'Internal Server Error' });
         }
 
-        const carCollection = db.collection('car');
+        const carCollection = db.collection('cars');
 
         // Extract car ID from the request parameters
         const carId = req.params.id;
