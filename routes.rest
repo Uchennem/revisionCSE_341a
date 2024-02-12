@@ -26,14 +26,14 @@ Content-Type: application/json
 
 #onrender
 # Update a contact
-PUT http://localhost:8080/cars/
+PUT http://localhost:8080/cars/65c8502e5d68ff669405a7ef
 
 Content-Type: application/json
 
 {
   
  "inv_model": "UdontCme",
-    "inv_year": "2015",
+    "inv_year": "2015"
 }
 
 ###

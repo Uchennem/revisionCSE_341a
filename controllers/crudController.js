@@ -131,7 +131,7 @@ async function updateCar(req, res) {
 
 
         // Update the car in the database
-        await carCollection.updateOne({ _id: (carId) }, { $set: updateFields });
+        await carCollection.updateOne({ _id: new ObjectId(carId) }, { $set: updateFields });
 
         // Return success status
         res.sendStatus(204);
@@ -160,7 +160,7 @@ async function deleteCar(req, res) {
         }
 
         // Delete the car from the database
-        await carCollection.deleteOne({ _id: (carId) });
+        await carCollection.deleteOne({ _id: new ObjectId (carId) });
 
         // Return success status
         res.sendStatus(200);
