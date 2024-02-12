@@ -26,8 +26,7 @@ Content-Type: application/json
 
 #onrender
 # Update a contact
-PUT http://localhost:8080/cars/65c8502e5d68ff669405a7ef
-
+PUT https://cse341-revision.onrender.com/cars/65c969a91d55509748329d40
 Content-Type: application/json
 
 {
@@ -39,6 +38,6 @@ Content-Type: application/json
 ###
 
 # Delete a contact
-DELETE http://localhost:/contacts/65b5aaa3cd16244068c37370
+DELETE https://cse341-revision.onrender.com/cars/65b5aaa3cd16244068c37370
 
 
