@@ -55,22 +55,19 @@ async function retrieveOneCar(req, res) {
 async function createCar(req, res) {
     try {
         // Extract required fields from the request body
-        const car = {
+        const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_colour, classification_id } = req.body;
 
-            inv_make: req.body.inv_make,
-            inv_model: req.body.inv_model,
-            inv_year: req.body.inv_year,
-            inv_description: req.body.inv_description,
-            inv_image: req.body.inv_image,
-            inv_thumbnail: req.body.inv_thumbnail,
-            inv_price: req.body.inv_price,
-            inv_miles: req.body.inv_miles,
-            inv_color: req.body.inv_colour,
-            classification_id: req.body.classification_id
+        // Validate the required fields
+        const validationErrors = [];
+        if (!inv_make) validationErrors.push('inv_make is required');
+        if (!inv_model) validationErrors.push('inv_model is required');
+        if (!inv_year) validationErrors.push('inv_year is required');
+        // Add more validation rules as needed...
 
-          };
+        if (validationErrors.length > 0) {
+            return res.status(400).json({ errors: validationErrors });
+        }
 
-        
         const db = getDb();
         if (!db) {
             return res.status(500).json({ error: 'Internal Server Error' });
@@ -78,7 +75,19 @@ async function createCar(req, res) {
 
         const carCollection = db.collection('cars');
 
-        
+        // Construct the car object
+        const car = {
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_image,
+            inv_thumbnail,
+            inv_price,
+            inv_miles,
+            inv_color: inv_colour, // Corrected property name
+            classification_id
+        };
 
         // Insert the new car into the database
         const result = await carCollection.insertOne(car);
@@ -113,6 +122,24 @@ async function updateCar(req, res) {
         // Check if the car ID is valid
         if (!ObjectId.isValid(carId)) {
             return res.status(400).json({ error: 'Invalid car ID' });
+        }
+        
+        // Array of required properties
+        const requiredProperties = [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id];
+
+        // Array to hold valiodation errors
+        const validationErrors = []
+
+        for (const property in req.body) {
+            if (!requiredProperties.includes(property)) {
+                validationErrors.push(`${property} is not a valid property`);
+            }
+        }
+
+        // Check if there are any validation errors
+        if (validationErrors.length > 0) {
+            // Return 400 Bad Request with validation errors
+            return res.status(400).json({ errors: validationErrors });
         }
 
 
