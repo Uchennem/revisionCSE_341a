@@ -124,23 +124,24 @@ async function updateCar(req, res) {
             return res.status(400).json({ error: 'Invalid car ID' });
         }
         
-        // Array of required properties
-        const requiredProperties = [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id];
+       // List of valid properties for updating a car
+       const validProperties = ['inv_make', 'inv_model', 'inv_year', 'inv_description', 'inv_image', 'inv_thumbnail', 'inv_price', 'inv_miles', 'inv_color', 'classification_id'];
 
-        // Array to hold valiodation errors
-        const validationErrors = []
+       // Array to hold validation errors
+       const validationErrors = [];
 
-        for (const property in req.body) {
-            if (!requiredProperties.includes(property)) {
-                validationErrors.push(`${property} is not a valid property`);
-            }
-        }
+       // Check if any updated property is not in the list of valid properties
+       for (const property in req.body) {
+           if (!validProperties.includes(property)) {
+               validationErrors.push(`${property} is not a valid property for updating`);
+           }
+       }
 
-        // Check if there are any validation errors
-        if (validationErrors.length > 0) {
-            // Return 400 Bad Request with validation errors
-            return res.status(400).json({ errors: validationErrors });
-        }
+       // Check if there are any validation errors
+       if (validationErrors.length > 0) {
+        // Return 400 Bad Request with validation errors
+        return res.status(400).json({ errors: validationErrors });
+    }
 
 
         // Construct update query
