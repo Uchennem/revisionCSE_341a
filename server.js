@@ -2,7 +2,7 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger-output.json')
 const express = require('express');
 const app = express();
-const axios = require('axios');
+const { auth, requiresAuth } = require('express-openid-connect');
 const { initDb } = require('./mongoDB/mongodb.js')
 const router = require('./routes/index.js')
 const utilities = require('./utilities/index.js')
@@ -43,31 +43,26 @@ app.use('/', utilities.handleErrors(router));
  * Authentification block
  * *******/
 
-app.get('/auth', (req, res) => {
-  res.redirect(
-    `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`,
-  );
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASE_URL,
+  clientID: process.env.CLIENT_ID,
+  issuerBaseURL: `https://${process.env.ISSUER_BASE_URL}`,
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
 
-app.get('/oauth-callback', ({ query: { code } }, res) => {
-  const body = {
-    client_id: process.env.GITHUB_CLIENT_ID,
-    client_secret: process.env.GITHUB_SECRET,
-    code,
-  };
-  const opts = { headers: { accept: 'application/json' } };
-  axios
-    .post('https://github.com/login/oauth/access_token', body, opts)
-    .then((_res) => _res.data.access_token)
-    .then((token) => {
-      // eslint-disable-next-line no-console
-      console.log('My token:', token);
-
-      res.redirect(`/?token=${token}`);
-    })
-    .catch((err) => res.status(500).json({ err: err.message }));
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
 });
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
