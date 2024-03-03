@@ -1,0 +1,39 @@
+[
+    {
+        "make": "Honda",
+        "model": "CBR1000RR",
+        "description": "The Honda CBR1000RR is a sportbike known for its powerful engine and agile handling."
+    },
+    {
+        "make": "Yamaha",
+        "model": "YZF-R6",
+        "description": "The Yamaha YZF-R6 is a popular supersport motorcycle renowned for its performance on the track."
+    },
+    {
+        "make": "Kawasaki",
+        "model": "Ninja ZX-10R",
+        "description": "The Kawasaki Ninja ZX-10R is a high-performance superbike with advanced electronics and aerodynamics."
+    },
+    {
+        "make": "Suzuki",
+        "model": "GSX-R1000",
+        "description": "The Suzuki GSX-R1000 is a legendary sportbike known for its winning heritage and cutting-edge technology."
+    },
+    {
+        "make": "BMW",
+        "model": "S1000RR",
+        "description": "The BMW S1000RR is a top-tier superbike with class-leading performance and innovative features."
+    },
+    {
+        "make": "Ducati",
+        "model": "Panigale V4",
+        "description": "The Ducati Panigale V4 is an exotic Italian superbike known for its stunning design and blistering speed."
+    },
+    {
+        "make": "Triumph",
+        "model": "Daytona 675",
+        "description": "The Triumph Daytona 675 is a nimble sportbike with a triple-cylinder engine, offering a unique riding experience."
+    }
+]
+
+

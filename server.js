@@ -62,10 +62,9 @@ app.use((req, res, next) => {
     }
 });
 
-app.use('/', utilities.handleErrors(router));
-
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use('/', utilities.handleErrors(router));
 
 
 app.use((req, res, next) => {
